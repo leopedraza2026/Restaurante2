@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pollería - Pedido</title>
+  <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+  <header>
+    <h1>Pollería — Sistema de Pedidos</h1>
+    <p class="subtitle">Añade/edita platos y gaseosas, toma pedidos numerados y consulta el inventario de ventas del día.</p>
+  </header>
+
+  <main class="container">
+    <section class="panel" id="admin-panel">
+      <h2>Gestión del menú</h2>
+
+      <form id="add-item-form" class="card">
+        <h3>Añadir nuevo ítem</h3>
+        <label>
+          Nombre
+          <input type="text" id="new-name" required />
+        </label>
+        <label>
+          Precio (en $)
+          <input type="number" id="new-price" min="0" step="0.01" required />
+        </label>
+        <label>
+          Categoría
+          <select id="new-category">
+            <option value="plato">Plato</option>
+            <option value="gaseosa">Gaseosa</option>
+          </select>
+        </label>
+        <label>
+          Stock (unidades)
+          <input type="number" id="new-stock" min="0" step="1" value="20" required />
+        </label>
+        <div class="actions">
+          <button type="submit">Agregar ítem</button>
+          <button type="button" id="reset-menu">Restablecer menú por defecto</button>
+        </div>
+      </form>
+
+      <div id="menu-list" class="card">
+        <h3>Items del menú</h3>
+        <div id="menu-items"></div>
+      </div>
+
+    </section>
+
+    <section class="panel" id="order-panel">
+      <h2>Crear pedido</h2>
+
+      <div id="menu-for-order" class="card">
+        <h3>Selecciona productos</h3>
+        <div id="order-items"></div>
+      </div>
+
+      <div id="cart" class="card">
+        <h3>Carrito</h3>
+        <div id="cart-items"></div>
+        <div class="cart-summary">
+          <div>Total: $<span id="cart-total">0.00</span></div>
+          <div class="cart-actions">
+            <button id="place-order" disabled>Confirmar pedido</button>
+            <button id="clear-cart">Vaciar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card order-number">
+        <strong>Nº de próximo pedido:</strong> <span id="next-order-number">—</span>
+      </div>
+    </section>
+
+    <section class="panel" id="sales-panel">
+      <h2>Resumen / Inventario de ventas del día</h2>
+
+      <div class="card" id="sales-summary">
+        <h3>Hoy</h3>
+        <p>Pedidos realizados hoy: <strong id="today-orders-count">0</strong></p>
+        <p>Total vendido hoy: $<strong id="today-total">0.00</strong></p>
+        <h4>Detalle por producto</h4>
+        <div id="today-product-breakdown"></div>
+        <div class="actions">
+          <button id="reset-sales-today">Resetear ventas de hoy (no menú)</button>
+          <button id="export-sales">Exportar ventas (JSON)</button>
+        </div>
+      </div>
+
+      <div class="card" id="inventory-panel">
+        <h3>Inventario actual</h3>
+        <div id="inventory-list"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <small>Datos guardados en localStorage del navegador. Las ventas se agrupan por fecha local.</small>
+  </footer>
+
+  <script src="index.js"></script>
+</body>
+</html>
